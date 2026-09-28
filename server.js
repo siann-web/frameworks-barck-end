@@ -56,3 +56,15 @@ app.put('/books/:id', (req, res) => {
         res.json(book);
     }
 });
+
+app.delete('/books/:id', (req, res) => {
+    const bookId = parseInt(req.params.id);
+    const bookIndex = books.findIndex(b => b.id === bookId);
+    if (bookIndex === -1) {
+        res.status(404).send('Livro não encontrado');
+    }
+    else {
+        books.splice(bookIndex, 1);
+        res.status(200).send('Livro removido com sucesso');
+    }
+});
